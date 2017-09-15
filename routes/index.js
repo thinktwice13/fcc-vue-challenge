@@ -1,6 +1,6 @@
 module.exports = app => {
   app.get("/", (req, res) => {
-    res.send({ msg: "Hello world!" })
+    res.send({ msg: "After-deployment test!" })
   })
 
   app.get("/api", (req, res) => {
