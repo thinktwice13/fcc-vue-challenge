@@ -8,13 +8,15 @@
           </v-list-tile-content>
         </v-list-tile>
 
-        <v-list-tile to="/quotes">
-          <v-list-tile-content>
-            <v-list-tile-title>
-              <div class="title">Quotes</div>
-            </v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
+        <div v-for="(val, key) in apps" :key="key">
+          <v-list-tile :to="key.toLowerCase()">
+            <v-list-tile-content>
+              <v-list-tile-title>
+                <div class="title">{{val}}</div>
+              </v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+        </div>
 
       </v-list>
     </v-navigation-drawer>
@@ -37,10 +39,12 @@
 </template>
 
 <script>
+import { apps } from "./utils/constants.js"
 export default {
   name: "app",
   data () {
     return {
+      apps,
       drawer: false
     }
   },
@@ -72,6 +76,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .title {
