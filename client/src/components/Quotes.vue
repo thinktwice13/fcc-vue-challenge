@@ -1,34 +1,35 @@
 <template>
-  <v-flex xs12 sm6 offset-sm3 class="flex-col-center">
-    <div class="display-3">{{title}}</div>
-    <v-card>
-      <v-card-title primary-title>
-        <div class="card-content">
-          <!-- <h3 class="headline mb-0">Kangaroo Valley Safari</h3> -->
-          <blockquote>
-            <div class="headline amber--text text--darken-4">{{ quote }}</div>
-          </blockquote>
-          <div class="subheading">- {{author}}</div>
-        </div>
-      </v-card-title>
-      <v-card-actions class="justify-center">
-        <v-btn flat class="amber--text text--darken-3" :href="tweetUrl" target="_blank">Share</v-btn>
-        <v-btn flat class="amber--text text--darken-3" @click="getQuote">Next</v-btn>
-      </v-card-actions>
-    </v-card>
-  </v-flex>
+  <div is="card" v-bind:title="title">
+    <v-card-title primary-title slot="card-content">
+      <div class="card-content">
+        <blockquote>
+          <div class="headline amber--text text--darken-4">{{ quote }}</div>
+        </blockquote>
+        <div class="subheading">- {{author}}</div>
+      </div>
+    </v-card-title>
+    <v-card-actions class="justify-center" slot="card-actions">
+      <v-btn flat class="amber--text text--darken-3" :href="tweetUrl" target="_blank">Share</v-btn>
+      <v-btn flat class="amber--text text--darken-3" @click="getQuote">Next</v-btn>
+    </v-card-actions>
+  </div>
 </template>
 
 <script>
 import axios from "axios"
+import Card from "./layout/Card"
+
 export default {
   name: "quotes",
+  components: {
+    Card
+  },
   data () {
     return {
       title: "Quote Generator",
       loading: false,
-      quote: " ",
-      author: " "
+      quote: null,
+      author: null
     }
   },
   computed: {
@@ -44,7 +45,9 @@ export default {
     }
   },
   mounted () {
-    this.getQuote()
+    if (!this.quote) {
+      this.getQuote()
+    }
   }
 }
 </script>
@@ -52,28 +55,24 @@ export default {
 <style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css?family=Great+Vibes');
 
-.card {
-  margin: 10px 0 85px 0;
+blockquote,
+div.subheading {
+  margin-right: 24px;
 }
 
-.card-content {
-  width: 100%;
-  blockquote,
-  .subheading {
-    padding-right: 24px;
-    margin: 15px 0;
-  }
-  blockquote {
-    border-left-color: #ff6f00;
-  }
-  .headline {
-    text-align: left;
-    font-weight: 900;
-  }
-  .subheading {
-    font-family: 'Great Vibes', cursive;
-    text-align: right;
-  }
+blockquote {
+  border-left-color: #ff6f00;
+}
+
+.headline {
+  text-align: left;
+  font-weight: 900;
+}
+
+.subheading {
+  font-family: 'Great Vibes', cursive;
+  text-align: right;
+  margin: 10px 0;
 }
 
 .justify-center {

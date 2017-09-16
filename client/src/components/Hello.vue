@@ -22,7 +22,7 @@ export default {
   name: 'hello',
   data () {
     return {
-      url: "https://github.com/thinktwice13"
+      url: "https://github.com/thinktwice13/fcc-vue-challenge"
     };
   },
 };
