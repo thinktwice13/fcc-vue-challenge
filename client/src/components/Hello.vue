@@ -1,6 +1,19 @@
 <template>
   <div class="hello">
-    <h1 class="amber--text text--darken-4">{{ msg }}</h1>
+    <div></div>
+    <div></div>
+    <h1 class="amber--text text--darken-4">FCC Vue Challenge</h1>
+    <v-layout justify-center>
+      <h4 class="amber--text text--darken-4">
+        <a :href="url" target="_blank">
+          <v-icon large class="amber--text text--darken-4">fa-github</v-icon>
+        </a>
+        <i>thinktwice13
+        </i>
+
+      </h4>
+    </v-layout>
+
   </div>
 </template>
 
@@ -9,7 +22,7 @@ export default {
   name: 'hello',
   data () {
     return {
-      msg: 'FCC Vue Challenge',
+      url: "https://github.com/thinktwice13"
     };
   },
 };
@@ -33,7 +46,13 @@ li {
   margin: 0 10px;
 }
 
+i {
+  font-style: normal;
+}
+
 a {
-  color: #42b983;
+  // color: #42b983;
+  text-decoration: none;
+  margin-right: 15px;
 }
 </style>

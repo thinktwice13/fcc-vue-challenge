@@ -1,23 +1,31 @@
 <template>
   <v-app id="app" toolbar footer>
     <v-navigation-drawer persistent v-model="drawer" light enable-resize-watcher absolute>
-      <v-list dense>
-        <v-list-tile @click="">
-          <v-list-tile-action>
-            <v-icon>home</v-icon>
-          </v-list-tile-action>
+      <v-list>
+        <v-list-tile to="/">
           <v-list-tile-content>
-            <v-list-tile-title>Home</v-list-tile-title>
+            <div class="title">Home</div>
           </v-list-tile-content>
         </v-list-tile>
+
+        <v-list-tile to="/quotes">
+          <v-list-tile-content>
+            <v-list-tile-title>
+              <div class="title">Quotes</div>
+            </v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+
       </v-list>
     </v-navigation-drawer>
     <v-toolbar class="grey darken-3" dark fixed>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>Toolbar</v-toolbar-title>
+      <v-toolbar-title>
+        <router-link to="/" tag="span">FCC Vue Challenge</router-link>
+      </v-toolbar-title>
     </v-toolbar>
     <main>
-      <v-container fluid>
+      <v-container class="flex-col-center">
         <router-view></router-view>
         <!--v-router-->
       </v-container>
@@ -43,8 +51,10 @@ export default {
 </script>
 
 <style lang="scss">
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700,900&subset=latin-ext');
+
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Lato", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -52,9 +62,27 @@ export default {
   /* margin-top: 60px; */
 }
 
-div.container.fluid {
+
+.toolbar__title {
+  font-weight: 700;
+}
+
+
+.flex-col-center {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.title {
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+a,
+a:visited,
+a:active,
+a * {
+  color: #ff6f00;
 }
 </style>
