@@ -7,7 +7,7 @@
   "license": "MIT",
   "engines": {
     "npm": "5.3.x",
-    "node": "8.4.x"
+    "node": "8.5.x"
   },
   "dependencies": {
     "express": "^4.15.4"
@@ -17,16 +17,14 @@
     "nodemon": "^1.12.1"
   },
   "scripts": {
-    "heroku-postinstall":
+    "postinstall":
       "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
-    "start": "node index.js",
-    "test": "node index.js",
+    "start": "node index",
+    "test": "npm run build --prefix client",
+    "build": "npm run build --prefix client",
     "server": "nodemon index.js",
     "client": "cd client && npm run dev",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
-  "cacheDirectories": [
-    "node_modules",
-    "client/node_modules"
-  ]
+  "cacheDirectories": ["node_modules", "client/node_modules"]
 }

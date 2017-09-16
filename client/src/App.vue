@@ -51,7 +51,7 @@ export default {
   mounted () {
     this.drawer = false
   }
-};
+}
 </script>
 
 <style lang="scss">

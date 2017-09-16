@@ -19,13 +19,13 @@
 
 <script>
 export default {
-  name: 'hello',
+  name: "hello",
   data () {
     return {
       url: "https://github.com/thinktwice13/fcc-vue-challenge"
-    };
+    }
   },
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
