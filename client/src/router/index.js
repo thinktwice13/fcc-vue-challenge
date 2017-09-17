@@ -3,6 +3,7 @@ import Router from "vue-router"
 import Hello from "@/components/Hello"
 import Quotes from "@/components/Quotes"
 import Weather from "@/components/Weather"
+import Wiki from "@/components/Wiki"
 
 Vue.use(Router)
 
@@ -10,18 +11,23 @@ export default new Router({
   routes: [
     {
       path: "/",
-      name: "Hello",
+      name: "hello",
       component: Hello
     },
     {
       path: "/quotes",
-      name: "Quotes",
+      name: "quotes",
       component: Quotes
     },
     {
       path: "/weather",
-      name: "weather",
+      name: "Wweather",
       component: Weather
+    },
+    {
+      path: "/wiki",
+      name: "wiki",
+      component: Wiki
     }
   ]
 })
