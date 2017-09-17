@@ -1,28 +1,36 @@
 <template>
-  <div is="card" v-bind:title="title">
-    <v-card-title primary-title slot="card-content">
-      <div class="card-content">
-        <blockquote>
-          <div class="headline amber--text text--darken-4">{{ quote }}</div>
-        </blockquote>
-        <div class="subheading">- {{author}}</div>
+  <div v-if="loading" is="loader" />
+  <v-layout v-else is="card-container" v-bind:title="title">
+    <v-flex xs12 sm6 offset-sm3 lg4 offset-lg4>
+      <v-card class="outer">
+        <v-card-title primary-title>
+          <div class="card-content">
+            <blockquote>
+              <div class="headline amber--text text--darken-4">{{ quote }}</div>
+            </blockquote>
+            <div class="subheading">- {{author}}</div>
+          </div>
+        </v-card-title>
+        <v-card-actions class="justify-center" slot="card-actions">
+          <v-btn flat class="amber--text text--darken-3" :href="tweetUrl" target="_blank">Share</v-btn>
+          <v-btn flat class="amber--text text--darken-3" @click="getQuote">Next</v-btn>
+        </v-card-actions>
+      </v-card>
       </div>
-    </v-card-title>
-    <v-card-actions class="justify-center" slot="card-actions">
-      <v-btn flat class="amber--text text--darken-3" :href="tweetUrl" target="_blank">Share</v-btn>
-      <v-btn flat class="amber--text text--darken-3" @click="getQuote">Next</v-btn>
-    </v-card-actions>
-  </div>
+    </v-flex>
+  </v-layout>
 </template>
+
 
 <script>
 import axios from "axios"
-import Card from "./layout/Card"
+import CardContainer from "./layout/CardContainer"
+import Loader from "./layout/Loader"
 
 export default {
   name: "quotes",
   components: {
-    Card
+    CardContainer, Loader
   },
   data () {
     return {
@@ -37,7 +45,6 @@ export default {
   },
   methods: {
     async getQuote () {
-      this.loading = true
       const res = await axios.get("https://random-quote-generator.herokuapp.com/api/quotes/random")
       this.quote = res.data.quote
       this.author = res.data.author
@@ -45,9 +52,8 @@ export default {
     }
   },
   mounted () {
-    if (!this.quote) {
-      this.getQuote()
-    }
+    this.loading = true
+    this.getQuote()
   }
 }
 </script>

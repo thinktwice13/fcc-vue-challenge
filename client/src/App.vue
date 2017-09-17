@@ -1,5 +1,7 @@
 <template>
   <v-app id="app" toolbar footer>
+
+    <!-- Sidebar -->
     <v-navigation-drawer persistent v-model="drawer" light enable-resize-watcher absolute>
       <v-list>
         <v-list-tile to="/">
@@ -17,24 +19,29 @@
             </v-list-tile-content>
           </v-list-tile>
         </div>
-
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar class="grey darken-3" dark fixed>
-      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+
+    <!-- Navbar -->
+    <v-toolbar class="primary" dark fixed>
+      <v-toolbar-side-icon @click.stop.prevent="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>
         <router-link to="/" tag="span">FCC Vue Challenge</router-link>
       </v-toolbar-title>
     </v-toolbar>
+
+    <!--  main content -->
     <main>
-      <v-container class="flex-col-center">
+      <v-container>
         <router-view></router-view>
-        <!--v-router-->
       </v-container>
     </main>
-    <v-footer class="grey darken-3">
+
+    <!-- Footer -->
+    <v-footer class="primary">
       <span class="white--text">© 2017</span>
     </v-footer>
+
   </v-app>
 </template>
 
@@ -54,17 +61,34 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="stylus">
+
 @import url('https://fonts.googleapis.com/css?family=Lato:300,400,700,900&subset=latin-ext');
+@import '../node_modules/vuetify/src/stylus/settings/_colors.styl'
+
+$theme := {
+  primary: $grey.darken-3
+  accent: $grey.lighten-1
+  secondary: $amber.darken-4
+  info: $blue.darken-1
+  warning: $yellow.darken-2
+  error: $red.base
+  success: $green.base
+}
+
+@import '../node_modules/vuetify/src/stylus/main.styl' 
 
 #app {
   font-family: "Lato", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  /* margin-top: 60px; */
+  color: $primary;
 }
+
+// * {
+//   outline: 2px dotted orange
+// }
 
 
 .toolbar__title {
@@ -72,11 +96,12 @@ export default {
 }
 
 
-.flex-col-center {
+main .container {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  max-width: 1170px;
+  padding: 10px
 }
 
 .title {

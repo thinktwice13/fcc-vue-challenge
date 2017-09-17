@@ -1,12 +1,10 @@
 <template>
   <div class="hello">
-    <div></div>
-    <div></div>
-    <h1 class="amber--text text--darken-4">FCC Vue Challenge</h1>
+    <h1 class="secondary--text">FCC Vue Challenge</h1>
     <v-layout justify-center>
-      <h4 class="amber--text text--darken-4">
+      <h4 class="secondary--text">
         <a :href="url" target="_blank">
-          <v-icon large class="amber--text text--darken-4">fa-github</v-icon>
+          <v-icon large class="secondary--text">fa-github</v-icon>
         </a>
         <i>thinktwice13
         </i>
