@@ -59,7 +59,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import url('https://fonts.googleapis.com/css?family=Great+Vibes');
+@import url("https://fonts.googleapis.com/css?family=Great+Vibes");
 
 blockquote,
 div.subheading {
