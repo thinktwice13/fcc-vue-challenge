@@ -1,18 +1,14 @@
 <template>
-  <div class="hello">
+  <v-layout column justify-center class="hello">
     <h1 class="secondary--text">FCC Vue Challenge</h1>
-    <v-layout justify-center>
-      <h4 class="secondary--text">
-        <a :href="url" target="_blank">
-          <v-icon large class="secondary--text">fa-github</v-icon>
-        </a>
-        <i>thinktwice13
-        </i>
-
-      </h4>
-    </v-layout>
-
-  </div>
+    <h4 class="secondary--text">
+      <a :href="url" target="_blank">
+        <v-icon large class="secondary--text">fa-github</v-icon>
+      </a>
+      <i>thinktwice13
+      </i>
+    </h4>
+  </v-layout>
 </template>
 
 <script>

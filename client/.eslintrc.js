@@ -17,6 +17,7 @@ module.exports = {
     quotes: [1, "double"],
     semi: ["error", "never"],
     "no-debugger": process.env.NODE_ENV === "production" ? 2 : 0,
-    "no-console": 0
+    "no-console": 0,
+    "no-unused-vars": 1
   }
 }
