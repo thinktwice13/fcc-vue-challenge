@@ -10,7 +10,7 @@ Inspired by [P1xt's speedrun challenges](https://github.com/P1xt/chingu-fcc-spee
 - [X] Quote generator
 - [X] Local weather
 - [X] Wiki viewer
-- [ ] Twitch.TV API
+- [X] Twitch.TV API
 - [ ] Pomodoro timer
 - [ ] Simon game
 - [ ] Tic tac toe
