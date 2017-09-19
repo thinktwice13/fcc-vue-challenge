@@ -1,97 +1,98 @@
 <template>
-  <div v-if="loading" is="loader" />
-  <v-layout v-else is="card-container" v-bind:title="title">
-    <v-flex xs12 sm6 lg4 offset-sm3 offset-lg4>
-
-      <v-card class="outer">
-        <v-container fluid grid-list-md class="subheading">
-          <v-layout row wrap>
-            <!-- Card title -->
-            <v-flex d-flex xs12>
-              <v-card flat tile>
-                <v-card-title primary-title class="pb-1">
-                  <div class="display-1 mb-0 amber--text text--darken-4">{{location}}</div>
-                </v-card-title>
-                <v-card-text class="subheading text-xs-left pt-0">{{desc}}</v-card-text>
-              </v-card>
-            </v-flex>
-
-            <!-- temp/img row -->
+  <v-layout column justify-center>
+    <div v-if="loading" is="loader" />
+    <div v-else is="card-container" v-bind:title="title">
+      <v-flex xs12 sm8 offset-sm2 md6 offset-md3 lg4 offset-lg4>
+        <v-card class="outer">
+          <v-container fluid grid-list-md class="subheading">
             <v-layout row wrap>
-              <!-- Temperature -->
-              <v-flex d-flex xs12 sm6>
-                <v-card tile flat @click="toggleUnit">
-                  <v-btn flat class="display-4">{{unitC? tempC : tempF}}
-                    <span>° {{unitC? "C" : "F"}}</span>
-                  </v-btn>
+              <!-- Card title -->
+              <v-flex d-flex xs12>
+                <v-card flat tile>
+                  <v-card-title primary-title class="pb-1">
+                    <div class="display-1 mb-0 amber--text text--darken-4">{{location}}</div>
+                  </v-card-title>
+                  <v-card-text class="subheading text-xs-left pt-0">{{desc}}</v-card-text>
                 </v-card>
               </v-flex>
 
-              <!-- Weather image -->
-              <v-flex d-flex xs12 sm6>
-                <v-card tile flat>
-                  <v-card-text><img class="cover" :src="icon"> </v-card-text>
-                </v-card>
-              </v-flex>
+              <!-- temp/img row -->
+              <v-layout row wrap>
+                <!-- Temperature -->
+                <v-flex d-flex xs12 sm6>
+                  <v-card tile flat @click="toggleUnit">
+                    <v-btn flat class="display-4">{{unitC? tempC : tempF}}
+                      <span>° {{unitC? "C" : "F"}}</span>
+                    </v-btn>
+                  </v-card>
+                </v-flex>
+
+                <!-- Weather image -->
+                <v-flex d-flex xs12 sm6>
+                  <v-card tile flat>
+                    <v-card-text><img class="cover" :src="icon"> </v-card-text>
+                  </v-card>
+                </v-flex>
+              </v-layout>
+
+              <!-- bottom info blocks -->
+              <v-layout row wrap>
+
+                <!-- min max temps -->
+                <v-flex d-flex xs12 sm6>
+                  <v-layout row wrap>
+
+                    <v-flex xs6 sm12>
+                      <v-card tile flat>
+                        <v-card-text>MIN
+                          <span>{{unitC? temp_minC : temp_minF}}
+                          </span>
+                        </v-card-text>
+                      </v-card>
+                    </v-flex>
+
+                    <v-flex xs6 sm12>
+                      <v-card tile flat>
+                        <v-card-text>MAX
+                          <span>{{unitC? temp_maxC : temp_maxF}}
+                          </span>
+                        </v-card-text>
+                      </v-card>
+                    </v-flex>
+
+                  </v-layout>
+                </v-flex>
+
+                <!-- huidity/pressure -->
+                <v-flex d-flex xs12 sm6>
+                  <v-layout row wrap>
+
+                    <v-flex d-flex xs6 sm12>
+                      <v-card tile flat>
+                        <v-card-text>PRESSURE
+                          <span>{{press}}
+                          </span>
+                        </v-card-text>
+                      </v-card>
+                    </v-flex>
+
+                    <v-flex d-flex xs6 sm12>
+                      <v-card tile flat>
+                        <v-card-text>HUMIDITY
+                          <span>{{hum}}
+                          </span>
+                          %</v-card-text>
+                      </v-card>
+                    </v-flex>
+
+                  </v-layout>
+                </v-flex>
+              </v-layout>
             </v-layout>
-
-            <!-- bottom info blocks -->
-            <v-layout row wrap>
-
-              <!-- min max temps -->
-              <v-flex d-flex xs12 sm6>
-                <v-layout row wrap>
-
-                  <v-flex xs6 sm12>
-                    <v-card tile flat>
-                      <v-card-text>MIN
-                        <span>{{unitC? temp_minC : temp_minF}}
-                        </span>
-                      </v-card-text>
-                    </v-card>
-                  </v-flex>
-
-                  <v-flex xs6 sm12>
-                    <v-card tile flat>
-                      <v-card-text>MAX
-                        <span>{{unitC? temp_maxC : temp_maxF}}
-                        </span>
-                      </v-card-text>
-                    </v-card>
-                  </v-flex>
-
-                </v-layout>
-              </v-flex>
-
-              <!-- huidity/pressure -->
-              <v-flex d-flex xs12 sm6>
-                <v-layout row wrap>
-
-                  <v-flex d-flex xs6 sm12>
-                    <v-card tile flat>
-                      <v-card-text>PRESSURE
-                        <span>{{press}}
-                        </span>
-                      </v-card-text>
-                    </v-card>
-                  </v-flex>
-
-                  <v-flex d-flex xs6 sm12>
-                    <v-card tile flat>
-                      <v-card-text>HUMIDITY
-                        <span>{{hum}}
-                        </span>
-                        %</v-card-text>
-                    </v-card>
-                  </v-flex>
-
-                </v-layout>
-              </v-flex>
-            </v-layout>
-          </v-layout>
-        </v-container>
-      </v-card>
-    </v-flex>
+          </v-container>
+        </v-card>
+      </v-flex>
+    </div>
   </v-layout>
 </template>
 
