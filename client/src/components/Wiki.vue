@@ -12,24 +12,17 @@ div(is="card-container", v-bind:title="title")
                 v-flex(d-flex fill-height align-center)
                   v-btn(class="secondary", href='https://en.wikipedia.org/wiki/Special:Random', target="_blank")
                     | Random
-      
-      v-list(v-if="!!articles" three-line, transition="slide-y-transition")
-        div(v-for="(article, key) in articles", :key="key")
-          v-divider
-          v-list-tile(@click="")
-            a(v-bind:href="article.fullurl", target="_blank")
-              v-list-tile-content
-                  v-list-tile-title(class="subheading") {{article.title}}
-                  v-list-tile-sub-title {{article.extract}}
+      div(v-if="!!articles", is="card-list", v-bind:list="articles")
 </template>
 
 <script>
 import axios from "axios"
 import CardContainer from "./layout/CardContainer"
+import CardList from "./layout/CardList"
 
 export default {
   name: "wiki",
-  components: { CardContainer },
+  components: { CardContainer, CardList },
   data () {
     return {
       title: "Wiki Viewer",
@@ -40,15 +33,8 @@ export default {
   watch: {
     async phrase (phrase) {
       const results = (await axios.get(`https://en.wikipedia.org/w/api.php?format=json&origin=*&action=query&generator=search&prop=extracts|info&inprop=url&exintro&explaintext&exsentences=1&exlimit=max&gsrsearch=${phrase}`)).data
-      console.log(results)
-      this.articles = results.query && results.query.pages || false
-    }
-  },
-  methods: {
-    async getArticles () {
-      const results = (await axios.get(`https://en.wikipedia.org/w/api.php?format=json&origin=*&action=query&generator=search&prop=extracts|info&inprop=url&exintro&explaintext&exsentences=1&exlimit=max&gsrsearch=zagreb`)).data
-      console.log(results)
-      this.articles = results.query && results.query.pages || false
+      // this.articles = results.query && results.query.pages || false
+      this.articles = results.query && Object.values(results.query.pages).map(article => ({ title: article.title, description: article.extract, url: article.fullurl }))
     }
   }
 }
@@ -58,14 +44,4 @@ export default {
 .searchbox-wiki {
   min-width 250px
 }
-
-.subheading
-  font-weight 900
-
-a,
-a:visited,
-a:active,
-a * 
-  text-decoration none
-
 </style>
