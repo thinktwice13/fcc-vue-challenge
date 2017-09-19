@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: "card",
+  name: "CardContainer",
   props: ["title"],
   data: () => ({
     isMobile: false
