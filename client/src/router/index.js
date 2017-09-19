@@ -4,6 +4,7 @@ import Hello from "@/components/Hello"
 import Quotes from "@/components/Quotes"
 import Weather from "@/components/Weather"
 import Wiki from "@/components/Wiki"
+import Twitch from "@/components/Twitch"
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
       path: "/wiki",
       name: "wiki",
       component: Wiki
+    },
+    {
+      path: "/twitch",
+      name: "twitch",
+      component: Twitch
     }
   ]
 })
