@@ -1,7 +1,7 @@
 <template lang="pug">
-v-layout(column justify-center, is="card-container", v-bind:title="title")
-  v-flex(xs12 sm6 offset-sm3)
-    v-card(elevation-20)
+div(is="card-container", v-bind:title="title")
+  v-flex(xs12 sm8 offset-sm2 md6 offset-md3)
+    v-card
       v-container(fluid grid-list-lg)
         v-layout(row)
           v-flex(xs12)
@@ -55,7 +55,6 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-
 .searchbox-wiki {
   min-width 250px
 }
