@@ -1,5 +1,5 @@
 <template lang="pug">
-  div
+  v-layout(justify-center align-center)
     v-progress-circular(indeterminate, v-bind:size="85", v-bind:width="4" ,class="secondary--text")
 </template>
 

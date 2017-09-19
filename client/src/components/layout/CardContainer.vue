@@ -1,15 +1,15 @@
 <template>
-  <v-layout column>
+  <div>
     <div v-bind:class="{ 'display-3': !isMobile, 'display-1': isMobile}">{{title}}</div>
     <div class="mt-3 card-outer">
       <slot>Some Content wil go here</slot>
     </div>
-  </v-layout>
+  </div>
 </template>
 
 <script>
 export default {
-  name: "card",
+  name: "CardContainer",
   props: ["title"],
   data: () => ({
     isMobile: false

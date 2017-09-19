@@ -32,7 +32,7 @@
 
     <!--  main content -->
     <main>
-      <v-container>
+      <v-container d-flex xs12 lg10 offset-lg1 class="pa-3">
         <router-view></router-view>
       </v-container>
     </main>
@@ -93,15 +93,6 @@ $theme := {
 
 .toolbar__title {
   font-weight: 700;
-}
-
-
-main .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  max-width: 1170px;
-  padding: 10px
 }
 
 .title {

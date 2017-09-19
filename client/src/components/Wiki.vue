@@ -1,5 +1,5 @@
 <template lang="pug">
-v-layout(row, is="card-container", v-bind:title="title")
+v-layout(column justify-center, is="card-container", v-bind:title="title")
   v-flex(xs12 sm6 offset-sm3)
     v-card(elevation-20)
       v-container(fluid grid-list-lg)
