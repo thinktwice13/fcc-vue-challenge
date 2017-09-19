@@ -6,6 +6,7 @@ import Weather from "@/components/Weather"
 import Wiki from "@/components/Wiki"
 import Twitch from "@/components/Twitch"
 import Pomodoro from "@/components/Pomodoro"
+import Simon from "@/components/Simon"
 
 Vue.use(Router)
 
@@ -40,6 +41,11 @@ export default new Router({
       path: "/pomodoro",
       name: "pomodoro",
       component: Pomodoro
+    },
+    {
+      path: "/simon",
+      name: "simon",
+      component: Simon
     }
   ]
 })
