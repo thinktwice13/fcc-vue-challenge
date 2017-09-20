@@ -8,7 +8,7 @@ import axios from "axios"
 export default {
   name: "nightlifeHome",
   async mounted () {
-    const res = await axios.get("/api/nighlife/" + "Lima")
+    const res = await axios.get("/api/nightlife/" + "Lima")
     console.log(res.data)
   }
 }
