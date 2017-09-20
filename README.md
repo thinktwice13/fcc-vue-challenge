@@ -11,7 +11,7 @@ Inspired by [P1xt's speedrun challenges](https://github.com/P1xt/chingu-fcc-spee
 - [X] Local weather
 - [X] Wiki viewer
 - [X] Twitch.TV API
-- [ ] Pomodoro timer
+- [X] Pomodoro timer
 - [ ] Simon game
 - [ ] Tic tac toe
 

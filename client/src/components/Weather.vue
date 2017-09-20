@@ -10,7 +10,7 @@
               <v-flex d-flex xs12>
                 <v-card flat tile>
                   <v-card-title primary-title class="pb-1">
-                    <div class="display-1 mb-0 amber--text text--darken-4">{{location}}</div>
+                    <div class="display-1 mb-0 secondary--text">{{location}}</div>
                   </v-card-title>
                   <v-card-text class="subheading text-xs-left pt-0">{{desc}}</v-card-text>
                 </v-card>
