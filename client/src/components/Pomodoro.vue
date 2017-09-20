@@ -24,7 +24,7 @@
                     .title.mb-1.secondary--text Break
                   v-flex(xs6 sm12)
                     .display-1 {{pause}}
-            v-btn.mt-4(block secondary @click="start") Start
+            v-btn.mt-4(block secondary @click="flow") {{isWorking ? "Pause" : "Start"}}
 </template>
 
 <script>
@@ -59,24 +59,29 @@ export default {
       const displayMins = ("0" + ((this.isWorking ? this.work : this.pause) - (!!secs ? 1 : 0) - mins)).slice(-2)
       const displaySecs = ("0" + (secs === 0 ? 0 : (60 - secs))).slice(-2)
       this.display = displayMins + " : " + displaySecs
-
+    },
+    work (val) {
+      this.work = val < 1 ? 0 : val
+    },
+    pause (val) {
+      this.pause = val < 1 ? 0 : val
     }
   },
   methods: {
-    start () {
+    flow () {
       if (!this.isWorking) {
         this.timeInterval = window.setInterval(() => this.time++, 1000)
-        this.isWorking = !this.isWorking
+        this.isWorking = true
+      }
+      else {
+        const time = Math.floor(new Date())
+        console.log(time)
+        window.clearInterval(this.timeInterval)
+        this.isWorking = false
       }
     },
-    adjustWork (ev) {
-      this.work = ev.wheelDelta > 0 ? this.work + 1 : this.work - 1
-      if (this.work < 1) this.work = 1
-    },
-    adjustBreak (ev) {
-      this.pause = ev.wheelDelta > 0 ? this.pause + 1 : this.pause - 1
-      if (this.pause < 1) this.pause = 1
-    }
+    adjustWork (ev) { this.work = ev.wheelDelta > 0 ? this.work + 1 : this.work - 1 },
+    adjustBreak (ev) { this.pause = ev.wheelDelta > 0 ? this.pause + 1 : this.pause - 1 }
   }
 }
 </script>
