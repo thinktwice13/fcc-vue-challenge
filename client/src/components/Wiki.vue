@@ -10,8 +10,7 @@ div(is="card-container", v-bind:title="title")
                 v-text-field(v-model="phrase", name="searchbox-wiki", label="Search Wiki", single-line)
               v-card(flat tile)
                 v-flex(d-flex fill-height align-center)
-                  v-btn(class="secondary", href='https://en.wikipedia.org/wiki/Special:Random', target="_blank")
-                    | Random
+                  v-btn(class="secondary", href='https://en.wikipedia.org/wiki/Special:Random', target="_blank") Random
       div(v-if="!!articles", is="card-list", v-bind:list="articles")
 </template>
 

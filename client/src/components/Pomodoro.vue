@@ -12,18 +12,30 @@
             v-divider.my-4
             //- selectors
             v-layout(row wrap)
+              v-flex(d-flex xs12 sm6 align-center)
+                  v-flex.adjustBtn(d-flex xs2 fill-height align-center)
+                    v-btn(icon, :disabled="isWorking", @click="workDown")
+                      v-icon remove
+                  v-layout(row wrap v-on:wheel="adjustWork" v-on:click="timePicker = !timePicker")
+                    v-flex(d-flex align-center xs6 sm12)
+                      .title.mb-1.secondary--text Work
+                    v-flex(xs6 sm12)
+                      .display-1 {{work}}
+                  v-flex.adjustBtn(d-flex xs2 fill-height align-center)
+                    v-btn(icon, :disabled="isWorking", @click="workUp")
+                      v-icon add
               v-flex(d-flex xs12 sm6)
-                v-layout(row wrap v-on:wheel="adjustWork" v-on:click="timePicker = !timePicker")
-                  v-flex(xs6 sm12)
-                    .title.mb-1.secondary--text Work
-                  v-flex(xs6 sm12)
-                    .display-1 {{work}}
-              v-flex(d-flex xs12 sm6)
+                v-flex.adjustBtn(d-flex xs2 fill-height align-center)
+                    v-btn(icon, :disabled="isWorking", @click="pauseDown")
+                      v-icon remove
                 v-layout(row wrap v-on:wheel="adjustBreak")
-                  v-flex(xs6 sm12)
+                  v-flex(d-flex align-center xs6 sm12)
                     .title.mb-1.secondary--text Break
                   v-flex(xs6 sm12)
                     .display-1 {{pause}}
+                v-flex.adjustBtn(d-flex xs2 fill-height align-center)
+                  v-btn(icon, :disabled="isWorking", @click="pauseUp")
+                    v-icon add
             v-btn.mt-4(block secondary @click="flow") {{isWorking ? "Pause" : "Start"}}
 </template>
 
@@ -68,20 +80,22 @@ export default {
     }
   },
   methods: {
+    adjustWork (ev) { if (!this.isWorking) this.work = ev.wheelDelta > 0 ? this.work + 1 : this.work - 1 },
+    adjustBreak (ev) { if (!this.isWorking) this.pause = ev.wheelDelta > 0 ? this.pause + 1 : this.pause - 1 },
+    workUp () { this.work++ },
+    workDown () { this.work-- },
+    pauseUp () { this.pause++ },
+    pauseDown () { this.pause-- },
     flow () {
       if (!this.isWorking) {
         this.timeInterval = window.setInterval(() => this.time++, 1000)
         this.isWorking = true
       }
       else {
-        const time = Math.floor(new Date())
-        console.log(time)
         window.clearInterval(this.timeInterval)
         this.isWorking = false
       }
-    },
-    adjustWork (ev) { this.work = ev.wheelDelta > 0 ? this.work + 1 : this.work - 1 },
-    adjustBreak (ev) { this.pause = ev.wheelDelta > 0 ? this.pause + 1 : this.pause - 1 }
+    }
   }
 }
 </script>
