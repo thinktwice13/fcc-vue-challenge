@@ -10,6 +10,7 @@
     "node": "8.x.x"
   },
   "dependencies": {
+    "axios": "^0.16.2",
     "express": "^4.15.4"
   },
   "devDependencies": {
@@ -17,12 +18,14 @@
     "nodemon": "^1.12.1"
   },
   "scripts": {
-    "heroku-postbuild":
-      "npm install  && cd client && npm install && npm install --only=dev && npm run build",
+    "heroku-postbuild": "npm install  && cd client && npm install && npm install --only=dev && npm run build",
     "start": "node index",
     "server": "nodemon index",
     "client": "cd client && npm run dev",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
-  "cacheDirectories": ["node_modules", "client/node_modules"]
+  "cacheDirectories": [
+    "node_modules",
+    "client/node_modules"
+  ]
 }
