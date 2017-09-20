@@ -36,7 +36,7 @@
                 v-flex.adjustBtn(d-flex xs2 fill-height align-center)
                   v-btn(icon, :disabled="isWorking", @click="pauseUp")
                     v-icon add
-            v-btn.mt-4(block secondary @click="flow") {{isWorking ? "Pause" : "Start"}}
+            v-btn.mt-4(block :class="!isWorking ? 'success' : 'secondary'" @click="flow") {{isWorking ? "Pause" : "Start"}}
 </template>
 
 <script>
