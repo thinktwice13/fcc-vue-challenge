@@ -28,6 +28,10 @@
       <v-toolbar-title>
         <router-link to="/" tag="span">FCC Vue Challenge</router-link>
       </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-items>
+        <v-btn flat @click="login">Login</v-btn>
+      </v-toolbar-items>
     </v-toolbar>
 
     <!--  main content -->
@@ -57,6 +61,11 @@ export default {
   },
   mounted () {
     this.drawer = false
+  },
+  methods: {
+    login () {
+      console.log("Login button clicked")
+    }
   }
 }
 </script>
