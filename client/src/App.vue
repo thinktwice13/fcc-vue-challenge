@@ -30,7 +30,8 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items>
-        <v-btn flat @click="login">Login</v-btn>
+        <v-btn v-if="!$store.state.isLoggedIn" href="/auth/google" flat>Login with Google</v-btn>
+        <v-btn v-if="$store.state.isLoggedIn" href="/api/logout" flat>Logout</v-btn>
       </v-toolbar-items>
     </v-toolbar>
 
@@ -60,12 +61,7 @@ export default {
     }
   },
   mounted () {
-    this.drawer = false
-  },
-  methods: {
-    login () {
-      console.log("Login button clicked")
-    }
+    this.$store.dispatch("fetchUser", null)
   }
 }
 </script>
