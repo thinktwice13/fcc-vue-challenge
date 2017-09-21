@@ -17,7 +17,6 @@ export default {
       type: Array,
       required: true,
       validator: list => {
-        console.log(list)
         return list ? true : list[0].hasOwnProperty("url") && list[0].hasOwnProperty("title") && list[0].hasOwnProperty("description")
       }
     }
