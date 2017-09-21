@@ -9,7 +9,7 @@
             v-list-tile-title.subheading {{item.title}}
             v-list-tile-sub-title {{item.description}}
           v-list-tile-action(v-if="action")
-            v-list-tile-action-text {{Going}}
+            v-list-tile-action-text Going
             v-switch(@click.prevent="onActionClick")
 </template>
 
