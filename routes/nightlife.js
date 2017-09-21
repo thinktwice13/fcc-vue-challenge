@@ -7,7 +7,6 @@ const fourSquareApiUrl = `https://api.foursquare.com/v2/venues/search?LOCATION&c
 
 module.exports = app => {
   app.post("/api/nightlife/search", async (req, res) => {
-    console.log(req.body)
     locationString = ""
     if (req.body.phrase) {
       locationString = `near=${req.body.phrase}`
