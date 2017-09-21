@@ -13,8 +13,8 @@ div(is="card-container", v-bind:title="title")
                   v-btn.secondary(@click="fetchVenues({phrase})", target="_blank") Search
                   v-btn.secondary(@click="() => fetchVenues()", target="_blank") Near me
                    v-icon(right dark) fa-map-marker
-        v-subheader(v-if="venues") Provided by FourSquare
-      div(v-if="!!venues", is="card-list", v-bind:list="venues")
+      div(v-if="!!venues", is="card-list", v-bind:list="venues" action)
+        v-subheader Provided by FourSquare
 </template>
 
 <script>
