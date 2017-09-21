@@ -14,7 +14,7 @@
             v-layout(row wrap)
               v-flex(d-flex xs12 sm6 align-center)
                   v-flex.adjustBtn(xs3 d-flex)
-                    v-btn(icon, :disabled="isWorking", @click="workDown")
+                    v-btn(icon, :disabled="!isPaused", @click="workDown")
                       v-icon remove
                   v-layout(row wrap v-on:wheel="adjustWork")
                     v-flex(d-flex align-center xs6 sm12)
@@ -22,11 +22,11 @@
                     v-flex(xs6 sm12)
                       .display-1 {{work}}
                   v-flex.adjustBtn(xs3 d-flex)
-                    v-btn(icon, :disabled="isWorking", @click="workUp")
+                    v-btn(icon, :disabled="!isPaused", @click="workUp")
                       v-icon add
               v-flex(d-flex xs12 sm6 align-center)
                 v-flex.adjustBtn(xs3 d-flex)
-                    v-btn(icon, :disabled="isWorking", @click="pauseDown")
+                    v-btn(icon, :disabled="!isPaused", @click="pauseDown")
                       v-icon remove
                 v-layout(row wrap v-on:wheel="adjustBreak")
                   v-flex(d-flex align-center xs6 sm12)
@@ -34,9 +34,9 @@
                   v-flex(xs6 sm12)
                     .display-1 {{pause}}
                 v-flex.adjustBtn(xs3 d-flex)
-                  v-btn(icon, :disabled="isWorking", @click="pauseUp")
+                  v-btn(icon, :disabled="!isPaused", @click="pauseUp")
                     v-icon add
-            v-btn.mt-4(block :class="!isWorking ? 'success' : 'secondary'" @click="flow") {{isWorking ? "Pause" : "Start"}}
+            v-btn.mt-4(block :class="!isWorking ? 'success' : 'secondary'" @click="flow") {{isPaused ? "Start" : "Pause"}}
 </template>
 
 <script>
@@ -52,7 +52,8 @@ export default {
       work: 25,
       pause: 5,
       time: 0,
-      isWorking: false
+      isWorking: true,
+      isPaused: true
     }
   },
   watch: {
@@ -73,28 +74,27 @@ export default {
       this.display = displayMins + ":" + displaySecs
     },
     work (val) {
-      this.work = val < 1 ? 0 : val
+      this.work = val < 1 ? 1 : val
     },
     pause (val) {
-      this.pause = val < 1 ? 0 : val
+      this.pause = val < 1 ? 1 : val
     }
   },
   methods: {
-    adjustWork (ev) { if (!this.isWorking) this.work = ev.wheelDelta > 0 ? this.work + 1 : this.work - 1 },
-    adjustBreak (ev) { if (!this.isWorking) this.pause = ev.wheelDelta > 0 ? this.pause + 1 : this.pause - 1 },
+    adjustWork (ev) { if (this.isPaused) this.work = ev.wheelDelta > 0 ? this.work + 1 : this.work - 1 },
+    adjustBreak (ev) { if (this.isPaused) this.pause = ev.wheelDelta > 0 ? this.pause + 1 : this.pause - 1 },
     workUp () { this.work++ },
     workDown () { this.work-- },
     pauseUp () { this.pause++ },
     pauseDown () { this.pause-- },
     flow () {
-      if (!this.isWorking) {
+      if (this.isPaused) {
         this.timeInterval = window.setInterval(() => this.time++, 1000)
-        this.isWorking = true
       }
       else {
         window.clearInterval(this.timeInterval)
-        this.isWorking = false
       }
+      this.isPaused = !this.isPaused
     }
   }
 }
