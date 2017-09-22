@@ -1,9 +1,9 @@
-import Home from "../components/nightlife/Home"
+import Nightlife from "../components/Nightlife"
 
 export default [
   {
     path: "/nightlife",
-    name: "nightlifeHome",
-    component: Home
+    name: "nightlife",
+    component: Nightlife
   }
 ]
