@@ -30,7 +30,6 @@ export default {
     const promises = streamerList.map(streamer => axios.get(apiUrl + streamer))
     return axios.all(promises)
       .then(res => {
-        console.log(res)
         this.streamers = res.map(({ data }, index) => ({
           url: "https://www.twitch.tv/" + streamerList[index],
           title: streamerList[index],
