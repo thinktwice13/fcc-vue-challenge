@@ -1,4 +1,4 @@
-# FCC Vue Challenge
+# FCC Vue Challenge [![Build Status](https://travis-ci.org/thinktwice13/fcc-vue-challenge.svg?branch=master)](https://travis-ci.org/thinktwice13/fcc-vue-challenge)
 ## Description
 [FreeCodeCamp*s](https://www.freecodecamp.org) projects built with **Node**, **Mongo** and **Vue**.
 <br>
