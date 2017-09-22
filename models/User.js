@@ -1,22 +1,15 @@
 const mongoose = require("mongoose")
+const Schema = mongoose.Schema
 
 module.exports = mongoose.model(
   "users",
-  new mongoose.Schema({
+  new Schema({
     email: String,
     googleId: String,
-    nighlife: [
-      {
-        venueId: String,
-        going: {
-          type: Boolean,
-          default: false
-        },
-        dateGoing: {
-          type: Date,
-          default: Date.now
-        }
-      }
-    ]
+    nightlife: {
+      search: Schema.Types.Mixed,
+      date: String,
+      attending: [String]
+    }
   })
 )

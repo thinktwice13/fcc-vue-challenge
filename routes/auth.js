@@ -20,10 +20,10 @@ module.exports = app => {
     if (!req.user) {
       //if there is no authenticated user sent qith request
       const id = await require("../services/publicIp")(req.headers)
-      res.send({ _id: id, auth: false })
+      res.send({ user: { _id: id }, auth: false })
     } else {
       //if logged in user found
-      res.send({ _id: req.user._id, auth: true })
+      res.send({ user: req.user, auth: true })
     }
   })
 
