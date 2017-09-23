@@ -9,7 +9,8 @@ module.exports = mongoose.model(
     nightlife: {
       search: Schema.Types.Mixed,
       date: String,
-      attending: [String]
+      attending: [String],
+      favs: [String]
     }
   })
 )
