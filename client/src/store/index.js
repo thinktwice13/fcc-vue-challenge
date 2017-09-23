@@ -22,8 +22,8 @@ export default new Vuex.Store({
     setUser(state, response) {
       //resset attending venues if today is after last recorded data
       const today = new Date().toJSON().slice(0, 10)
-      if (today > response.user.nightlife.date) {
-        response.nightlife.attending = []
+      if (response.auth && today > response.user.nightlife.date) {
+        response.user.nightlife.attending = []
       }
       state.user = response.user
       state.isLoggedIn = response.auth

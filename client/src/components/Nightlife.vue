@@ -30,6 +30,7 @@ export default {
   name: "nighlife",
   components: { CardContainer, CardList },
   data () {
+    this.venues
     return {
       title: "Nightlife Coordination",
       phrase: ""
@@ -45,6 +46,13 @@ export default {
       if (this.user.nightlife) {
         this.fetchVenues(this.user.nightlife.search)
       }
+    }
+  },
+  created () {
+    //preload user's search if exists
+    if (this.isLoggedIn && this.user.nightlife) {
+      const lastSearched = this.user.nightlife.search
+      lastSearched && this.fetchVenues(lastSearched)
     }
   },
   methods: {
