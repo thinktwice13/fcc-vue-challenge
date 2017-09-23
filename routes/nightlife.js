@@ -11,8 +11,7 @@ module.exports = app => {
         { _id: req.user._id },
         {
           $set: {
-            "nightlife.search": req.body,
-            "nightlife.date": new Date().toJSON().slice(0, 10)
+            "nightlife.search": req.body
           }
         },
         err => {
@@ -27,7 +26,23 @@ module.exports = app => {
       { _id: req.user._id },
       {
         $set: {
-          "nightlife.attending": req.body
+          "nightlife.attending": req.body,
+          "nightlife.date": new Date().toJSON().slice(0, 10)
+        }
+      },
+      err => {
+        if (err) console.log(err)
+        else res.send({})
+      }
+    )
+  })
+
+  app.put("/api/nightlife/fav", async (req, res) => {
+    User.update(
+      { _id: req.user._id },
+      {
+        $set: {
+          "nightlife.favs": req.body
         }
       },
       err => {
