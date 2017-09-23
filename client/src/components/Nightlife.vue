@@ -13,7 +13,7 @@ div(is="card-container", v-bind:title="title")
                   v-btn.secondary(@click="() => fetchVenues({phrase})", target="_blank", :disabled="!phrase") Search
                   v-btn.secondary(@click="() => fetchVenues()", target="_blank") Near me
                    v-icon(right dark) fa-map-marker
-      div(v-if="!!venues", is="card-list", v-bind:list="venues", :action="isLoggedIn", @list-action-click="setAttendance")
+      div(v-if="!!venues", is="card-list", v-bind:list="venues", :action1="isLoggedIn", :action2="isLoggedIn", @list-action1-click="setFavorite", @list-action2-click="setAttendance")
         v-subheader Provided by FourSquare
 </template>
 
@@ -64,6 +64,16 @@ export default {
         }
       }
       this.$store.dispatch("fetchVenues", location)
+    },
+    setFavorite (venueId) {
+      const favs = this.user.nightlife.favs
+      let newFavs = []
+      if (favs.includes(venueId)) {
+        newFavs = favs.filter(venue => venue !== venueId)
+      } else {
+        newFavs = [...favs, venueId]
+      }
+      this.$store.dispatch("setFavorite", { newFavs, venueId })
     },
     setAttendance (venueId) {
       const attending = this.user.nightlife.attending

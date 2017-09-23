@@ -15,6 +15,10 @@ export default {
         .venues.response.groups[0].items
       commit("showVenues", { location, items })
     },
+    setFavorite({ commit }, { newFavs, venueId }) {
+      commit("setFavs", { newFavs, venueId })
+      axios.put("/api/nightlife/fav", newFavs)
+    },
     setAttendance({ commit }, { toAttend, venueId }) {
       commit("setAttendance", { toAttend, venueId })
       axios.put("/api/nightlife/attend", toAttend)
@@ -29,6 +33,7 @@ export default {
         user.nightlife = {
           search: location,
           attending: [],
+          favs: [],
           date: new Date().toJSON().slice(0, 10)
         }
       } else {
@@ -44,9 +49,16 @@ export default {
             .venue.location.address}`,
           url: `https://www.google.com/maps/search/${item.venue.name} ${item
             .venue.location.city} ${item.venue.location.country}`,
-          going: this.getters.user.nightlife.attending.includes(item.venue.id)
+          going: this.getters.user.nightlife.attending.includes(item.venue.id),
+          fav: this.getters.user.nightlife.favs.includes(item.venue.id)
         }
       })
+    },
+    setFavs(state, { newFavs, venueId }) {
+      this.getters.user.nightlife.favs = newFavs
+      state.venues.find(
+        venue => venue.id === venueId && (venue.fav = !venue.fav)
+      )
     },
     setAttendance(state, { toAttend, venueId }) {
       this.getters.user.nightlife.attending = toAttend

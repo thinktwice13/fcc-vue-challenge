@@ -10,16 +10,23 @@
           v-list-tile-content
             v-list-tile-title.subheading {{item.title}}
             v-list-tile-sub-title {{item.description}}
-          v-list-tile-action(v-if="action")
-            v-list-tile-action-text {{item.going ? "Going": "Not going"}}
-            v-switch(@click.prevent="actionClick(item.id)", v-model="item.going")
+          v-list-tile-action(v-if="action1")
+            v-list-tile-action-text.hidden Fav
+            v-btn(icon @click.prevent="action1Click(item.id)", v-model="item.fav")
+              v-icon(:class="item.fav && 'secondary--text'") favorite
+          v-list-tile-action(v-if="action2")
+            v-list-tile-action-text(:class="!item.going && 'hidden'") Going
+            v-switch(@click.prevent="action2Click(item.id)", v-model="item.going")
 </template>
 
 <script>
 export default {
   name: "CardList",
   props: {
-    action: {
+    action1: {
+      type: Boolean
+    },
+    action2: {
       type: Boolean
     },
     list: {
@@ -31,8 +38,11 @@ export default {
     }
   },
   methods: {
-    actionClick (itemId) {
-      this.$emit("list-action-click", itemId)
+    action1Click (itemId) {
+      this.$emit("list-action1-click", itemId)
+    },
+    action2Click (itemId) {
+      this.$emit("list-action2-click", itemId)
     }
   }
 }
@@ -42,9 +52,13 @@ export default {
 
 .list__tile__action--stack
   align-items flex-start
+  justify-content center
 
 .subheading
   font-weight 900
+
+.hidden
+  opacity 0
 
 a,
 a:visited,
