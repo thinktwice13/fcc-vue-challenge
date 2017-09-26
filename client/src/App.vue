@@ -110,5 +110,6 @@ a:visited,
 a:active,
 a * {
   color: #ff6f00;
+  text-decoration: none;
 }
 </style>
