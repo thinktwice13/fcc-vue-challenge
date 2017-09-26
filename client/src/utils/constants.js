@@ -4,5 +4,6 @@ export const apps = {
   WIKI: "Wiki Viewer",
   TWITCH: "Twitch.TV",
   POMODORO: "Pomodoro Timer",
-  NIGHTLIFE: "Nightlife App"
+  NIGHTLIFE: "Nightlife App",
+  STOCK: "Stock Chart"
 }
