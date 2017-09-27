@@ -3,6 +3,7 @@ module.exports = app => {
     res.send({ msg: "Request successfully proxied." })
   })
 
-  require("./nightlife")(app)
   require("./auth")(app)
+  require("./stocks")(app)
+  require("./nightlife")(app)
 }

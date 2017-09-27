@@ -6,6 +6,12 @@ module.exports = mongoose.model(
   new Schema({
     email: String,
     googleId: String,
+    stocks: [
+      {
+        type: String,
+        default: []
+      }
+    ],
     nightlife: {
       search: Schema.Types.Mixed,
       date: String,
