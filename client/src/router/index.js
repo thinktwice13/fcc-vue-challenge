@@ -6,7 +6,7 @@ import Weather from "@/components/Weather"
 import Wiki from "@/components/Wiki"
 import Twitch from "@/components/Twitch"
 import Pomodoro from "@/components/Pomodoro"
-import Stock from "@/components/Stock"
+import Stocks from "@/components/Stocks"
 import nightlifeRoutes from "./nightlife"
 
 Vue.use(Router)
@@ -44,9 +44,9 @@ export default new Router({
       component: Pomodoro
     },
     {
-      path: "/stock",
-      name: "stock",
-      component: Stock
+      path: "/stocks",
+      name: "stocks",
+      component: Stocks
     },
     ...nightlifeRoutes
   ]
