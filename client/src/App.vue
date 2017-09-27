@@ -4,6 +4,7 @@
     <!-- Sidebar -->
     <v-navigation-drawer persistent v-model="drawer" light enable-resize-watcher absolute>
       <v-list>
+
         <v-list-tile to="/">
           <v-list-tile-content>
             <div class="title">Home</div>
@@ -11,7 +12,9 @@
         </v-list-tile>
 
         <div v-for="(val, key) in apps" :key="key">
-          <v-list-tile :to="key.toLowerCase()">
+
+          <v-divider v-if="val === ''"></v-divider>
+          <v-list-tile v-else :to="key.toLowerCase()">
             <v-list-tile-content>
               <v-list-tile-title>
                 <div class="title">{{val}}</div>
