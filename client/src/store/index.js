@@ -31,10 +31,11 @@ export default new Vuex.Store({
       state.isLoggedIn = response.auth
     },
     addStock(state, { symbol }) {
-      state.user.stocks[state.user.stocks.length] = symbol
+      if (state.isLoggedIn) state.user.stocks[state.user.stocks.length] = symbol
     },
     removeStock(state, symbol) {
-      state.user.stocks = state.user.stocks.filter(stock => stock !== symbol)
+      if (state.isLoggedIn)
+        state.user.stocks = state.user.stocks.filter(stock => stock !== symbol)
     }
   },
   modules: {
