@@ -2,8 +2,8 @@
   div(is="card-container" :title="title")
     v-flex(xs12 sm10 offset-sm1 md8 offset-md2)
       v-card
-        div.pa-5(v-if="isLoggedIn && !options.series" is="loader")
-        div(v-else-if="!options.series || options.series.length < 1" is="message" msg="No stocks selected")
+        div(v-if="!isLoggedIn && (!options.series || !options.series.length) || isLoggedIn && !user.stocks.length" is="message" msg="No stocks selected")
+        div.pa-5(v-else-if="isLoggedIn && !options.series" is="loader")
         highstock(v-else :options="options")
         v-container(v-if="options")
           v-chip(v-for="value in options.series" @input="() => removeStock(value.name)" close) {{value.name}}
