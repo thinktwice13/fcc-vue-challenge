@@ -3,6 +3,7 @@ import Vuex from "vuex"
 import axios from "axios"
 import nightlife from "./nightlife"
 import stocks from "./stocks"
+import { saveStock, removeStock } from "../services/user"
 
 Vue.use(Vuex)
 
@@ -28,6 +29,12 @@ export default new Vuex.Store({
       }
       state.user = response.user
       state.isLoggedIn = response.auth
+    },
+    addStock(state, symbol) {
+      state.user.stocks[state.user.stocks.length] = symbol
+    },
+    removeStock(state, symbol) {
+      state.user.stocks = state.user.stocks.filter(stock => stock !== symbol)
     }
   },
   modules: {

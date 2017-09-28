@@ -3,21 +3,21 @@
     v-flex(xs12 sm10 offset-sm1 md8 offset-md2)
       v-card
         highstock(:options="options")
-        v-container
-          v-chip(v-for="chip in user.stocks" close) {{chip}}
+        v-container(v-if="user")
+          v-chip(v-for="(chip, index) in user.stocks" @input="() => removeStock(chip)" close) {{chip}}
         v-container
           v-layout(row wrap justify-center)
             v-card(class="searchbox-stock", flat tile)
               v-text-field(v-model="phrase" 
                 name="searchbox-stock"
                 label="Enter Stock Symbol"
-                @keyup.enter="fetchStock"
+                @keyup.enter="addStock"
                 single-line)
             v-card(flat tile)
               v-flex(d-flex fill-height align-center)
                 v-btn(class="secondary", 
                 type="submit", 
-                @click.prevent="fetchStock", 
+                @click.prevent="addStock", 
                 :disabled="!phrase",
                 :loading="loading") Add
       div.caption Data provided for free by 
@@ -53,9 +53,12 @@ export default {
     loading: "loading"
   }),
   methods: {
-    fetchStock () {
+    addStock () {
       if (!this.phrase) return
-      this.$store.dispatch("fetchStock", this.phrase)
+      this.$store.dispatch("addStock", this.phrase)
+    },
+    removeStock (symbol) {
+      this.$store.dispatch("removeStock", symbol)
     }
   }
 }
