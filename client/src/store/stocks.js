@@ -5,7 +5,7 @@ export default {
   state: {
     loading: false,
     options: {
-      series: [],
+      series: null,
       rangeSelector: {
         selected: 2
       },
@@ -27,20 +27,20 @@ export default {
     },
     async addStock({ commit, rootState }, phrase) {
       const symbol = phrase
-      if (!rootState.user.stocks.includes(symbol)) {
+      if (!rootState.isLoggedIn || !rootState.user.stocks.includes(symbol)) {
         commit("loading", true)
         const data = await getStock([symbol])
         // save stock if chart data found
         if (data) {
-          saveStock(symbol)
+          rootState.isLoggedIn && saveStock(symbol)
           commit("addStock", { symbol, data }, { root: true })
         }
         commit("loading", false)
       }
     },
-    async removeStock({ commit }, symbol) {
+    async removeStock({ commit, rootState }, symbol) {
       commit("loading", true)
-      removeStock(symbol)
+      rootState.isLoggedIn && removeStock(symbol)
       commit("removeStock", symbol, { root: true })
       commit("loading", false)
     }
@@ -50,8 +50,7 @@ export default {
       this.state.loading = status
     },
     addStock(state, { symbol, data }) {
-      console.log(data)
-      state.options.series.push({
+      const stock = {
         type: "ohlc",
         name: symbol,
         data: data[symbol].chart.map(d => [
@@ -70,10 +69,15 @@ export default {
             ["month", [1, 2, 3, 4, 6]]
           ]
         }
-      })
+      }
+
+      if (!state.options.series) {
+        state.options.series = [stock]
+      } else {
+        state.options.series.push(stock)
+      }
     },
     removeStock(state, symbol) {
-      console.log(symbol)
       const index = state.options.series.findIndex(stock => {
         stock.name === symbol
       })

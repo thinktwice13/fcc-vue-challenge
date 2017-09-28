@@ -2,11 +2,11 @@
   div(is="card-container" :title="title")
     v-flex(xs12 sm10 offset-sm1 md8 offset-md2)
       v-card
-        //- div.pa-5(v-if="!options.series.length" is="loader")
-        //- div.display-2(v-else-if="!options.series") No stocks selected
-        highstock(:options="options")
-        v-container(v-if="user")
-          v-chip(v-for="(chip, index) in user.stocks" @input="() => removeStock(chip)" close) {{chip}}
+        div.pa-5(v-if="isLoggedIn && !options.series" is="loader")
+        div(v-else-if="!options.series || options.series.length < 1" is="message" msg="No stocks selected")
+        highstock(v-else :options="options")
+        v-container(v-if="options")
+          v-chip(v-for="value in options.series" @input="() => removeStock(value.name)" close) {{value.name}}
         v-container
           v-layout(row wrap justify-center)
             v-card(class="searchbox-stock", flat tile)
@@ -29,11 +29,12 @@
 <script>
 import CardContainer from "./layout/CardContainer"
 import Loader from "./layout/Loader"
+import Message from "./layout/Message"
 import { mapState } from "vuex"
 
 export default {
   name: "stocks",
-  components: { CardContainer, Loader },
+  components: { CardContainer, Loader, Message },
   data () {
     return {
       title: "Stock Chart",
