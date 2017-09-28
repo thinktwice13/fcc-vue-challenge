@@ -30,7 +30,7 @@ export default new Vuex.Store({
       state.user = response.user
       state.isLoggedIn = response.auth
     },
-    addStock(state, symbol) {
+    addStock(state, { symbol }) {
       state.user.stocks[state.user.stocks.length] = symbol
     },
     removeStock(state, symbol) {

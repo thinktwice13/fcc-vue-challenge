@@ -2,6 +2,8 @@
   div(is="card-container" :title="title")
     v-flex(xs12 sm10 offset-sm1 md8 offset-md2)
       v-card
+        //- div.pa-5(v-if="!options.series.length" is="loader")
+        //- div.display-2(v-else-if="!options.series") No stocks selected
         highstock(:options="options")
         v-container(v-if="user")
           v-chip(v-for="(chip, index) in user.stocks" @input="() => removeStock(chip)" close) {{chip}}
@@ -26,36 +28,40 @@
 
 <script>
 import CardContainer from "./layout/CardContainer"
+import Loader from "./layout/Loader"
 import { mapState } from "vuex"
 
 export default {
   name: "stocks",
-  components: { CardContainer },
+  components: { CardContainer, Loader },
   data () {
     return {
       title: "Stock Chart",
-      phrase: "",
-      options: {
-        chart: {
-          renderTo: 'card',
-          type: 'ohlc'
-        },
-        series: [{
-          showInNavigator: true,
-          name: 'Jane',
-          data: [1, 0, 4]
-        }]
-      }
+      phrase: ""
     }
   },
   computed: mapState({
+    isLoggedIn: "isLoggedIn",
     user: "user",
-    loading: "loading"
+    loading: "loading",
+    options: state => state.stocks.options
   }),
+  watch: {
+    user () {
+      if (this.user.stocks) {
+        this.$store.dispatch("fetchStocks", null)
+      }
+    }
+  },
+  created () {
+    if (this.isLoggedIn && this.user.stocks) {
+      this.$store.dispatch("fetchStocks", null)
+    }
+  },
   methods: {
     addStock () {
       if (!this.phrase) return
-      this.$store.dispatch("addStock", this.phrase)
+      this.$store.dispatch("addStock", this.phrase.toUpperCase())
     },
     removeStock (symbol) {
       this.$store.dispatch("removeStock", symbol)
