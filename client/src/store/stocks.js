@@ -1,20 +1,27 @@
 import { getStock } from "../services/stocks"
-import { saveStock } from "../services/user"
+import { saveStock, removeStock } from "../services/user"
 
 export default {
   state: {
     loading: false,
-    stock: []
+    stocks: []
   },
   actions: {
-    async fetchStock({ commit }, phrase) {
-      //TODO check if stock exists
+    async addStock({ commit, rootState }, phrase) {
       const symbol = phrase
+      if (!rootState.user.stocks.includes(symbol)) {
+        commit("loading", true)
+        await getStock(symbol)
+        saveStock(symbol)
+        commit("addStock", symbol, { root: true })
+        commit("loading", false)
+      }
+    },
+    async removeStock({ commit }, symbol) {
       commit("loading", true)
-      const stock = await getStock(symbol)
-      saveStock(symbol)
+      removeStock(symbol)
+      commit("removeStock", symbol, { root: true })
       commit("loading", false)
-      console.log(stock)
     }
   },
   mutations: {
