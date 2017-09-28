@@ -5,8 +5,8 @@ export default {
     venues: null
   },
   getters: {
-    user(state, getters, rootState) {
-      return rootState.user
+    userNightlife(state, getters, rootState) {
+      return rootState.user.nightlife
     }
   },
   actions: {
@@ -26,18 +26,18 @@ export default {
   },
   mutations: {
     showVenues(state, { items, location }) {
-      const user = this.getters.user
-
+      let userNightlife = this.getters.userNightlife
+      console.log(userNightlife)
       //update user with new searh preferences
-      if (!user.nightlife) {
-        user.nightlife = {
+      if (!userNightlife) {
+        userNightlife = {
           search: location,
           attending: [],
           favs: [],
           date: new Date().toJSON().slice(0, 10)
         }
       } else {
-        user.nightlife.search = location
+        userNightlife.search = location
       }
       state.venues = items.map(item => {
         const photo = item.venue.photos.groups[0].items[0]
@@ -49,19 +49,19 @@ export default {
             .venue.location.address}`,
           url: `https://www.google.com/maps/search/${item.venue.name} ${item
             .venue.location.city} ${item.venue.location.country}`,
-          going: this.getters.user.nightlife.attending.includes(item.venue.id),
-          fav: this.getters.user.nightlife.favs.includes(item.venue.id)
+          going: userNightlife.attending.includes(item.venue.id),
+          fav: userNightlife.favs.includes(item.venue.id)
         }
       })
     },
     setFavs(state, { newFavs, venueId }) {
-      this.getters.user.nightlife.favs = newFavs
+      this.getters.userNightlife.favs = newFavs
       state.venues.find(
         venue => venue.id === venueId && (venue.fav = !venue.fav)
       )
     },
     setAttendance(state, { toAttend, venueId }) {
-      this.getters.user.nightlife.attending = toAttend
+      this.getters.userNightlife.attending = toAttend
       state.venues.find(
         venue => venue.id === venueId && (venue.going = !venue.going)
       )
