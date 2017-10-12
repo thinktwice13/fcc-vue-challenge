@@ -1,4 +1,8 @@
-import { getStock } from "../services/stocks"
+import {
+  getStock,
+  socketSubscribe,
+  socketUnsubscribe
+} from "../services/stocks"
 import { saveStock, removeStock } from "../services/user"
 
 export default {
@@ -21,6 +25,7 @@ export default {
         const data = await getStock(rootState.user.stocks)
         if (data) {
           commit("showStocks", data)
+          socketSubscribe(rootState.user.stocks)
         }
         commit("loading", false)
       }
@@ -34,6 +39,7 @@ export default {
         if (data) {
           rootState.isLoggedIn && saveStock(symbol)
           commit("addStock", { symbol, data }, { root: true })
+          socketSubscribe(symbol)
         }
         commit("loading", false)
       }
@@ -41,6 +47,7 @@ export default {
     async removeStock({ commit, rootState }, symbol) {
       commit("loading", true)
       rootState.isLoggedIn && removeStock(symbol)
+      socketUnsubscribe(symbol)
       commit("removeStock", symbol, { root: true })
       commit("loading", false)
     }
