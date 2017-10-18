@@ -18,7 +18,7 @@ Inspired by [P1xt's speedrun challenges](https://github.com/P1xt/chingu-fcc-spee
 ### Backend
 - [ ] Voting app
 - [X] Nightlife coordination app - using [FourSquare API](https://developer.foursquare.com/)
-- [ ] Stock market
+- [X] Stock market - data provided for free by [IEX](https://iextrading.com/developer)
 - [ ] Book trading club
 - [ ] Pinterest Clone
 
