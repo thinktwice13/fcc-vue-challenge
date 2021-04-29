@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-- '8'
+  - '8'
 branches:
   only:
     - master
@@ -9,9 +9,9 @@ deploy:
   provider: heroku
   api_key:
     secure: AlWuwoc9LeQRsSmmgxymUS3EsuvngWAQ9TIEoLJ16TbpsUwLvTC3rmHl9ug+84Ka4grgJddgJYxrw9AciZL5uHKSlltAvbNlggCENXEz8YP19kDcAQiG5cMvc5EQ57kbUGwTuFAsczi/MiswOaAqM01xlQTCvW5tZR5E2ihMTe1MocLoUMIUtCU7kWNDA+CWbGgtdk5FN9XJzUF7PeHybpqNx85y54muqcfTUT7aY4OY0OCcK0W8eFGDxo5LARcGsBbOOI/hUjtHNKrx5TijMuuFK2q0LXkCFlNF8Owjy/oh8A86NAz+aRU6cBmL7YWAZ8bomABIxJupG6nWyYVregFnifZONrnsqr1ASnXeftqbWwPXIWMgZRjMfB7HQvnBwPgFKmuub16d5d8FFSIzDfnTAYrEcfn6+eEK0d5snzTaqAKzrhopuY0aiB/7UD/ccT0mvExFOv6aeA2WE4F1HOIkdeEwHGslFreaBRM9YmDMaxMDBq+uuAOZy+Jio0K4dd/1KI5oGc/ZRx2j7NmK4flWx+6PwW19bdfx1jNoFN6UhxHgyoY7RQoUsZscetPYczPwZMrq/ix4AVE9VvTerWdKumNURy0lggy+eIeVEyb8uITxk8j7xDr6BjztVVD6ZTZ7+Si+LuG2tnaICSLny2jKs+pQhecyR7kjNVDlE8I=
-  app: powerful-ocean-66036
+  app: blooming-mesa-29121
   on: master
 cache:
   directories:
-  - node_modules
-  - client/node_modules
+    - node_modules
+    - client/node_modules
