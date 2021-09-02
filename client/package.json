@@ -14,7 +14,7 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
-    "axios": "^0.16.2",
+    "axios": "^0.21.1",
     "highcharts": "^5.0.14",
     "vue": "^2.4.2",
     "vue-highcharts": "^0.0.10",
